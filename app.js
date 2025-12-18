@@ -2,10 +2,15 @@ const express = require('express')
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser')
 const userRoute = require('./routes/userRoute')
+const logger = require('./middlewares/logger')
+const auth = require('./middlewares/userAuth')
+
 dotenv.config()
 
 const app = express()
 
+app.use(logger)
+app.use(auth)
 app.use(bodyParser.json())
 app.use('/api/books', userRoute)
 
